@@ -1,6 +1,6 @@
 import getParser, { Parser } from '../../src/parser/source-parser';
-import { Block, Line } from '../../src/primitives';
-import { splitLines, seedBlock, seedTokens } from '../../src/util';
+import { Line } from '../../src/primitives';
+import { splitLines, seedTokens } from '../../src/util';
 
 let _parse: Parser;
 
@@ -12,7 +12,7 @@ beforeEach(() => {
   _parse = getParser();
 });
 
-test('multi-line block', () => {
+it('multi-line block', () => {
   const parsed = parse(`
     /**
      * description 0
@@ -150,10 +150,10 @@ test('multi-line block', () => {
     },
   ];
 
-  expect(parsed).toEqual([...nulls(11), block]);
+  expect(parsed).to.deep.equal([...nulls(11), block]);
 });
 
-test('one-line block', () => {
+it('one-line block', () => {
   const parsed = parse(`
   /** description */
   `);
@@ -172,10 +172,10 @@ test('one-line block', () => {
     },
   ];
 
-  expect(parsed).toEqual([null, block, null]);
+  expect(parsed).to.deep.equal([null, block, null]);
 });
 
-test('multiple blocks', () => {
+it('multiple blocks', () => {
   const parsed = parse(`
     /** description 0 */
 
@@ -210,10 +210,10 @@ test('multiple blocks', () => {
     },
   ];
 
-  expect(parsed).toEqual([null, block0, null, block1, null]);
+  expect(parsed).to.deep.equal([null, block0, null, block1, null]);
 });
 
-test('start line number', () => {
+it('start line number', () => {
   const source = splitLines(`
   /** description */`);
 
@@ -233,5 +233,5 @@ test('start line number', () => {
     },
   ];
 
-  expect(parsed).toEqual([null, block]);
+  expect(parsed).to.deep.equal([null, block]);
 });

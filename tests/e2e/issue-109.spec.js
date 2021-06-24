@@ -1,4 +1,4 @@
-const { parse, inspect } = require('../../lib');
+const { parse } = require('../../lib');
 
 const source = `
   /**
@@ -12,10 +12,10 @@ const source = `
    *    which takes a number.
    */`;
 
-test('default', () => {
+it('default', () => {
   const parsed = parse(source);
   // console.log(inspect(parsed[0]));
-  expect(parsed[0].tags[1]).toMatchObject({
+  expect(parsed[0].tags[1]).to.shallowDeepEqual({
     tag: 'property',
     type: 'function(number,{x:string})',
     name: 'numberEater',
@@ -24,10 +24,10 @@ test('default', () => {
   });
 });
 
-test('preserve', () => {
+it('preserve', () => {
   const parsed = parse(source, { spacing: 'preserve' });
   // console.log(inspect(parsed[0]));
-  expect(parsed[0].tags[1]).toMatchObject({
+  expect(parsed[0].tags[1]).to.shallowDeepEqual({
     tag: 'property',
     type: 'function(\n  number,\n  {x:string}\n)',
     name: 'numberEater',
@@ -36,10 +36,10 @@ test('preserve', () => {
   });
 });
 
-test('compact', () => {
+it('compact', () => {
   const parsed = parse(source, { spacing: 'compact' });
   // console.log(inspect(parsed[0]));
-  expect(parsed[0].tags[1]).toMatchObject({
+  expect(parsed[0].tags[1]).to.shallowDeepEqual({
     tag: 'property',
     type: 'function(number,{x:string})',
     name: 'numberEater',

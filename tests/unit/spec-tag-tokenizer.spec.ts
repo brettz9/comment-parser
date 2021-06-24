@@ -3,7 +3,7 @@ import { seedTokens, seedSpec } from '../../src/util';
 
 const tokenize = tagTokenizer();
 
-test('ok', () => {
+it('ok', () => {
   expect(
     tokenize(
       seedSpec({
@@ -18,7 +18,7 @@ test('ok', () => {
         ],
       })
     )
-  ).toEqual(
+  ).to.equal(
     seedSpec({
       tag: 'param',
       source: [
@@ -36,7 +36,7 @@ test('ok', () => {
   );
 });
 
-test('require @', () => {
+it('require @', () => {
   expect(
     tokenize(
       seedSpec({
@@ -51,7 +51,7 @@ test('require @', () => {
         ],
       })
     )
-  ).toEqual(
+  ).to.equal(
     seedSpec({
       problems: [
         {
@@ -93,7 +93,7 @@ test.each([
         ],
       })
     )
-  ).toEqual(
+  ).to.equal(
     seedSpec({
       tag,
       source: [

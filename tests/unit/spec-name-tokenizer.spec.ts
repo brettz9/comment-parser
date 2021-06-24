@@ -3,7 +3,7 @@ import { seedTokens, seedSpec } from '../../src/util';
 
 const tokenize = nameTokenizer();
 
-test('single word', () => {
+it('single word', () => {
   expect(
     tokenize(
       seedSpec({
@@ -16,7 +16,7 @@ test('single word', () => {
         ],
       })
     )
-  ).toEqual(
+  ).to.equal(
     seedSpec({
       name: 'param',
       source: [
@@ -34,7 +34,7 @@ test('single word', () => {
   );
 });
 
-test('dash-delimitered', () => {
+it('dash-delimitered', () => {
   expect(
     tokenize(
       seedSpec({
@@ -47,7 +47,7 @@ test('dash-delimitered', () => {
         ],
       })
     )
-  ).toEqual(
+  ).to.equal(
     seedSpec({
       name: 'param-param',
       source: [
@@ -65,7 +65,7 @@ test('dash-delimitered', () => {
   );
 });
 
-test('quoted', () => {
+it('quoted', () => {
   expect(
     tokenize(
       seedSpec({
@@ -78,7 +78,7 @@ test('quoted', () => {
         ],
       })
     )
-  ).toEqual(
+  ).to.equal(
     seedSpec({
       name: 'param param',
       source: [
@@ -96,7 +96,7 @@ test('quoted', () => {
   );
 });
 
-test('inconsistent quotes', () => {
+it('inconsistent quotes', () => {
   expect(
     tokenize(
       seedSpec({
@@ -109,7 +109,7 @@ test('inconsistent quotes', () => {
         ],
       })
     )
-  ).toEqual(
+  ).to.equal(
     seedSpec({
       name: '"param',
       source: [
@@ -127,7 +127,7 @@ test('inconsistent quotes', () => {
   );
 });
 
-test('optional', () => {
+it('optional', () => {
   expect(
     tokenize(
       seedSpec({
@@ -140,7 +140,7 @@ test('optional', () => {
         ],
       })
     )
-  ).toEqual(
+  ).to.equal(
     seedSpec({
       name: 'param',
       optional: true,
@@ -159,7 +159,7 @@ test('optional', () => {
   );
 });
 
-test('optional with default', () => {
+it('optional with default', () => {
   expect(
     tokenize(
       seedSpec({
@@ -174,7 +174,7 @@ test('optional with default', () => {
         ],
       })
     )
-  ).toEqual(
+  ).to.equal(
     seedSpec({
       name: 'param',
       optional: true,
@@ -194,7 +194,7 @@ test('optional with default', () => {
   );
 });
 
-test('quoted default', () => {
+it('quoted default', () => {
   expect(
     tokenize(
       seedSpec({
@@ -209,7 +209,7 @@ test('quoted default', () => {
         ],
       })
     )
-  ).toEqual(
+  ).to.equal(
     seedSpec({
       name: 'param',
       optional: true,
@@ -229,7 +229,7 @@ test('quoted default', () => {
   );
 });
 
-test('loosely quoted default', () => {
+it('loosely quoted default', () => {
   expect(
     tokenize(
       seedSpec({
@@ -244,7 +244,7 @@ test('loosely quoted default', () => {
         ],
       })
     )
-  ).toEqual(
+  ).to.equal(
     seedSpec({
       name: 'param',
       optional: true,
@@ -264,7 +264,7 @@ test('loosely quoted default', () => {
   );
 });
 
-test('quoted default with =', () => {
+it('quoted default with =', () => {
   expect(
     tokenize(
       seedSpec({
@@ -279,7 +279,7 @@ test('quoted default with =', () => {
         ],
       })
     )
-  ).toEqual(
+  ).to.equal(
     seedSpec({
       name: 'param',
       optional: true,
@@ -299,7 +299,7 @@ test('quoted default with =', () => {
   );
 });
 
-test('non-alphanumeric', () => {
+it('non-alphanumeric', () => {
   expect(
     tokenize(
       seedSpec({
@@ -314,7 +314,7 @@ test('non-alphanumeric', () => {
         ],
       })
     )
-  ).toEqual(
+  ).to.equal(
     seedSpec({
       name: '$param',
       source: [
@@ -332,7 +332,7 @@ test('non-alphanumeric', () => {
   );
 });
 
-test('spread notation', () => {
+it('spread notation', () => {
   expect(
     tokenize(
       seedSpec({
@@ -347,7 +347,7 @@ test('spread notation', () => {
         ],
       })
     )
-  ).toEqual(
+  ).to.equal(
     seedSpec({
       name: '...params',
       source: [
@@ -365,7 +365,7 @@ test('spread notation', () => {
   );
 });
 
-test('optionsl spread notation', () => {
+it('optionsl spread notation', () => {
   expect(
     tokenize(
       seedSpec({
@@ -380,7 +380,7 @@ test('optionsl spread notation', () => {
         ],
       })
     )
-  ).toEqual(
+  ).to.equal(
     seedSpec({
       name: '...params',
       optional: true,
@@ -399,7 +399,7 @@ test('optionsl spread notation', () => {
   );
 });
 
-test('optional multiple words', () => {
+it('optional multiple words', () => {
   expect(
     tokenize(
       seedSpec({
@@ -414,7 +414,7 @@ test('optional multiple words', () => {
         ],
       })
     )
-  ).toEqual(
+  ).to.equal(
     seedSpec({
       name: 'param name',
       optional: true,
@@ -433,7 +433,7 @@ test('optional multiple words', () => {
   );
 });
 
-test('name spacing', () => {
+it('name spacing', () => {
   expect(
     tokenize(
       seedSpec({
@@ -448,7 +448,7 @@ test('name spacing', () => {
         ],
       })
     )
-  ).toEqual(
+  ).to.equal(
     seedSpec({
       name: 'param',
       optional: true,
@@ -468,7 +468,7 @@ test('name spacing', () => {
   );
 });
 
-test('inconsistent brackets', () => {
+it('inconsistent brackets', () => {
   expect(
     tokenize(
       seedSpec({
@@ -483,7 +483,7 @@ test('inconsistent brackets', () => {
         ],
       })
     )
-  ).toEqual(
+  ).to.equal(
     seedSpec({
       problems: [
         {
@@ -506,7 +506,7 @@ test('inconsistent brackets', () => {
   );
 });
 
-test('empty name', () => {
+it('empty name', () => {
   expect(
     tokenize(
       seedSpec({
@@ -521,7 +521,7 @@ test('empty name', () => {
         ],
       })
     )
-  ).toEqual(
+  ).to.equal(
     seedSpec({
       problems: [
         {
@@ -544,7 +544,7 @@ test('empty name', () => {
   );
 });
 
-test('empty default value', () => {
+it('empty default value', () => {
   expect(
     tokenize(
       seedSpec({
@@ -559,7 +559,7 @@ test('empty default value', () => {
         ],
       })
     )
-  ).toEqual(
+  ).to.equal(
     seedSpec({
       problems: [
         {
@@ -582,7 +582,7 @@ test('empty default value', () => {
   );
 });
 
-test('empty', () => {
+it('empty', () => {
   expect(
     tokenize(
       seedSpec({
@@ -597,7 +597,7 @@ test('empty', () => {
         ],
       })
     )
-  ).toEqual(
+  ).to.equal(
     seedSpec({
       problems: [
         {
@@ -620,7 +620,7 @@ test('empty', () => {
   );
 });
 
-test('default value syntax', () => {
+it('default value syntax', () => {
   expect(
     tokenize(
       seedSpec({
@@ -635,7 +635,7 @@ test('default value syntax', () => {
         ],
       })
     )
-  ).toEqual(
+  ).to.equal(
     seedSpec({
       problems: [
         {
@@ -658,7 +658,7 @@ test('default value syntax', () => {
   );
 });
 
-test('default with arrow', () => {
+it('default with arrow', () => {
   expect(
     tokenize(
       seedSpec({
@@ -673,7 +673,7 @@ test('default with arrow', () => {
         ],
       })
     )
-  ).toEqual(
+  ).to.equal(
     seedSpec({
       name: 'param',
       optional: true,
@@ -693,7 +693,7 @@ test('default with arrow', () => {
   );
 });
 
-test('after multiline {type}', () => {
+it('after multiline {type}', () => {
   const sourceIn = [
     {
       number: 0,
@@ -727,7 +727,7 @@ test('after multiline {type}', () => {
     description: 'description text',
   });
 
-  expect(tokenize(seedSpec({ source: sourceIn }))).toEqual(
+  expect(tokenize(seedSpec({ source: sourceIn }))).to.equal(
     seedSpec({
       name: 'paramname',
       source: sourceOut,

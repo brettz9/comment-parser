@@ -10,7 +10,7 @@ beforeEach(() => {
   stringify = getStringifier();
 });
 
-test('multiline', () => {
+it('multiline', () => {
   const source = `
   /**
    * Description may go
@@ -38,28 +38,28 @@ test('multiline', () => {
   const out = stringify(aligned);
 
   // console.log(inspect(aligned));
-  expect(out).toBe(expected);
+  expect(out).to.equal(expected);
 });
 
-test('one-liner', () => {
+it('one-liner', () => {
   const source = `  /** @tag {type} name description */`;
   const parsed = parse(source);
   const out = stringify(align()(parsed[0]));
 
-  expect(out).toBe(source);
+  expect(out).to.equal(source);
 });
 
-test('same line open', () => {
+it('same line open', () => {
   const source = `
   /** @tag {type} name description
    */`.slice(1);
   const parsed = parse(source);
   const out = stringify(align()(parsed[0]));
 
-  expect(out).toBe(source);
+  expect(out).to.equal(source);
 });
 
-test('same line close', () => {
+it('same line close', () => {
   const source = `
   /**
    * @tag {type} name description */`;
@@ -72,23 +72,23 @@ test('same line close', () => {
   const aligned = align()(parsed[0]);
   const out = stringify(aligned);
 
-  expect(out).toBe(expected);
+  expect(out).to.equal(expected);
 });
 
-test('spec source referencing', () => {
+it('spec source referencing', () => {
   const parsed = parse(`/** @tag {type} name Description */`);
   const block = align()(parsed[0]);
-  expect(block.tags[0].source[0] === block.source[0]).toBe(true);
+  expect(block.tags[0].source[0] === block.source[0]).to.equal(true);
 });
 
-test('block source clonning', () => {
+it('block source clonning', () => {
   const parsed = parse(`/** @tag {type} name Description */`);
   const block = align()(parsed[0]);
   parsed[0].source[0].tokens.description = 'test';
-  expect(block.source[0].tokens.description).toBe('Description ');
+  expect(block.source[0].tokens.description).to.equal('Description ');
 });
 
-test('ignore right whitespace', () => {
+it('ignore right whitespace', () => {
   const source = `
     /**
      * Description may go
@@ -113,10 +113,10 @@ test('ignore right whitespace', () => {
   const aligned = align()(parsed[0]);
   const stringified = stringify(aligned);
 
-  expect(stringified).toEqual(expected);
+  expect(stringified).to.equal(expected);
 });
 
-test('collapse postDelimiter', () => {
+it('collapse postDelimiter', () => {
   const source = `
     /**
      * Description may go
@@ -137,5 +137,5 @@ test('collapse postDelimiter', () => {
   const aligned = align()(parsed[0]);
   const stringified = stringify(aligned);
 
-  expect(stringified).toEqual(expected);
+  expect(stringified).to.equal(expected);
 });

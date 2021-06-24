@@ -80,7 +80,7 @@ function parse_escaping(source, parse, stringify, transforms) {
   // parse(source, {fence: '###'}) -- update source correspondingly
 
   /**
-   * @example "some code" 
+   * @example "some code"
   ###
   @decorator
   function hello() {
@@ -160,7 +160,7 @@ function parse_source_exploration(source, parse, stringify, transforms) {
     .map((s) => `${pos(s.start)} - ${pos(s.end)}\n${s.source}`);
 }
 
-function parse_advanced_parsing(source, parse, _, _, tokenizers) {
+function parse_advanced_parsing(source, parse, _, __, tokenizers) {
   // Each '@tag ...' section results into a Spec. The Spec is computed by
   // the chain of tokenizers each contributing a change to the the Spec.* and the Spec.tags[].tokens.
   // Default parse() options come with stadart tokenizers:

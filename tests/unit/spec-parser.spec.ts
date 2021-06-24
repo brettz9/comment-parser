@@ -28,7 +28,7 @@ const tokenizer = (message: string, critical = false) => {
   });
 };
 
-test('all tokens', () => {
+it('all tokens', () => {
   const parsed = parse([
     {
       number: 1,
@@ -38,7 +38,7 @@ test('all tokens', () => {
       }),
     },
   ]);
-  expect(parsed).toEqual(
+  expect(parsed).to.equal(
     seedSpec({
       tag: 'param',
       type: 'type',
@@ -65,7 +65,7 @@ test('all tokens', () => {
   );
 });
 
-test('quotes in description', () => {
+it('quotes in description', () => {
   const parsed = parse([
     {
       number: 1,
@@ -76,7 +76,7 @@ test('quotes in description', () => {
       }),
     },
   ]);
-  expect(parsed).toEqual(
+  expect(parsed).to.equal(
     seedSpec({
       tag: 'param',
       type: 'type',
@@ -103,7 +103,7 @@ test('quotes in description', () => {
   );
 });
 
-test('collect non-critical errors', () => {
+it('collect non-critical errors', () => {
   const parse = getParser({
     tokenizers: [tokenizer('warning 1'), tokenizer('warning 2')],
   });
@@ -116,7 +116,7 @@ test('collect non-critical errors', () => {
     },
   ]);
 
-  expect(parsed).toEqual({
+  expect(parsed).to.equal({
     tag: '',
     name: '',
     optional: false,
@@ -146,7 +146,7 @@ test('collect non-critical errors', () => {
   });
 });
 
-test('stop on critical error', () => {
+it('stop on critical error', () => {
   const parse = getParser({
     tokenizers: [tokenizer('error 1', true), tokenizer('warning 2')],
   });
@@ -159,7 +159,7 @@ test('stop on critical error', () => {
     },
   ]);
 
-  expect(parsed).toEqual({
+  expect(parsed).to.equal({
     tag: '',
     name: '',
     optional: false,

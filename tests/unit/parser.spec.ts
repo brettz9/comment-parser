@@ -1,16 +1,16 @@
 import getParser from '../../src/parser';
 import { seedTokens } from '../../src/util';
 
-test('block with tags', () => {
+it('block with tags', () => {
   const parsed = getParser()(`
   /**
-   * Description may go 
+   * Description may go
    * over few lines followed by @tags
    * @param {string} name name parameter
    *
    * @param {any} value value of any type
    */`);
-  expect(parsed).toEqual([
+  expect(parsed).to.deep.equal([
     {
       description: 'Description may go over few lines followed by @tags',
       tags: [
@@ -167,16 +167,16 @@ test('block with tags', () => {
   ]);
 });
 
-test('no source clonning', () => {
+it('no source clonning', () => {
   const parsed = getParser()(`
   /**
-   * Description may go 
+   * Description may go
    * over few lines followed by @tags
    * @param {string} name name parameter
    *
    * @param {any} value value of any type
    */`);
-  expect(parsed[0].tags[0].source[0] === parsed[0].source[3]).toBe(true);
+  expect(parsed[0].tags[0].source[0] === parsed[0].source[3]).to.equal(true);
 });
 
 test.each([
@@ -187,12 +187,12 @@ test.each([
   ['one-star oneliner', '/* */'],
   ['three-star oneliner', '/*** */'],
 ])('skip block - %s', (name, source) => {
-  expect(getParser()(source)).toEqual([]);
+  expect(getParser()(source)).to.deep.equal([]);
 });
 
 test.each([
   ['negative', -1],
   ['float', 1.5],
 ])('invalid start line - %s', (name, startLine) => {
-  expect(() => getParser({ startLine })).toThrow('Invalid startLine');
+  expect(() => getParser({ startLine })).to.throw('Invalid startLine');
 });

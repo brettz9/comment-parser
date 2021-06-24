@@ -13,7 +13,7 @@ test.each([
   ['mixed', 'a\nb\r\nc', ['a', 'b', 'c']],
   ['none', 'abc', ['abc']],
 ])('spliLines - %s', (name, source, parsed) =>
-  expect(splitLines(source)).toEqual(parsed)
+  expect(splitLines(source)).to.equal(parsed)
 );
 
 test.each([
@@ -22,7 +22,7 @@ test.each([
   ['pre+post', '  abc  ', ['  ', 'abc  ']],
   ['none', 'abc', ['', 'abc']],
 ])('spliSpace - %s', (name, source, parsed) =>
-  expect(splitSpace(source)).toEqual(parsed)
+  expect(splitSpace(source)).to.equal(parsed)
 );
 
 test.each([
@@ -40,11 +40,11 @@ test.each([
   ['symbols', '*', false],
   ['empty', '', false],
 ])('isSpace - %s', (name, source, result) =>
-  expect(isSpace(source)).toBe(result)
+  expect(isSpace(source)).to.equal(result)
 );
 
-test('seedTokens defaults', () => {
-  expect(seedTokens()).toEqual({
+it('seedTokens defaults', () => {
+  expect(seedTokens()).to.equal({
     start: '',
     delimiter: '',
     postDelimiter: '',
@@ -59,8 +59,8 @@ test('seedTokens defaults', () => {
   });
 });
 
-test('seedTokens overrides', () => {
-  expect(seedTokens({ description: 'abc' })).toEqual({
+it('seedTokens overrides', () => {
+  expect(seedTokens({ description: 'abc' })).to.equal({
     start: '',
     delimiter: '',
     postDelimiter: '',
@@ -75,8 +75,8 @@ test('seedTokens overrides', () => {
   });
 });
 
-test('seedBlock defaults', () => {
-  expect(seedBlock()).toEqual({
+it('seedBlock defaults', () => {
+  expect(seedBlock()).to.equal({
     description: '',
     tags: [],
     source: [],
@@ -84,8 +84,8 @@ test('seedBlock defaults', () => {
   });
 });
 
-test('seedBlock overrides', () => {
-  expect(seedBlock({ description: 'abc' })).toEqual({
+it('seedBlock overrides', () => {
+  expect(seedBlock({ description: 'abc' })).to.equal({
     description: 'abc',
     tags: [],
     source: [],
@@ -93,8 +93,8 @@ test('seedBlock overrides', () => {
   });
 });
 
-test('seedSpec defaults', () => {
-  expect(seedSpec()).toEqual({
+it('seedSpec defaults', () => {
+  expect(seedSpec()).to.equal({
     tag: '',
     name: '',
     type: '',
@@ -105,8 +105,8 @@ test('seedSpec defaults', () => {
   });
 });
 
-test('seedSpec overrides', () => {
-  expect(seedSpec({ description: 'abc' })).toEqual({
+it('seedSpec overrides', () => {
+  expect(seedSpec({ description: 'abc' })).to.equal({
     tag: '',
     name: '',
     type: '',

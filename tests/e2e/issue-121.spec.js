@@ -1,6 +1,6 @@
-const { parse, inspect } = require('../../lib');
+const { parse } = require('../../lib');
 
-test('name cut off', () => {
+it('name cut off', () => {
   const source = `
     /**
      * @param {{includeWhiteSpace: (boolean|undefined),
@@ -65,7 +65,7 @@ test('name cut off', () => {
   const parsed = parse(source);
   // console.log(inspect(parsed[0]));
 
-  expect(parsed[0]).toMatchObject({
+  expect(parsed[0]).to.shallowDeepEqual({
     problems: [],
     tags: [
       {

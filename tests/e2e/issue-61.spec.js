@@ -1,6 +1,6 @@
 const { default: getParser } = require('../../lib/parser');
 
-test('fenced description', () => {
+it('fenced description', () => {
   const parsed = getParser({ spacing: 'preserve' })(`
   /**
    * @example "" \`\`\`ts
@@ -114,7 +114,7 @@ class Foo { }
     },
   ];
 
-  expect(parsed).toEqual([
+  expect(parsed).to.deep.equal([
     {
       description: '',
       tags: [
@@ -134,7 +134,7 @@ class Foo { }
   ]);
 });
 
-test('fenced one-liner', () => {
+it('fenced one-liner', () => {
   const parsed = getParser({ spacing: 'preserve' })(
     '/** @example "" ```ts @transient() class Foo { } ```*/'
   );
@@ -159,7 +159,7 @@ test('fenced one-liner', () => {
     },
   ];
 
-  expect(parsed).toEqual([
+  expect(parsed).to.deep.equal([
     {
       description: '',
       tags: [
@@ -179,7 +179,7 @@ test('fenced one-liner', () => {
   ]);
 });
 
-test('multiple fences', () => {
+it('multiple fences', () => {
   const parsed = getParser({ spacing: 'preserve' })(`
   /**
    * @example "" \`\`\`ts
@@ -347,7 +347,7 @@ text
     },
   ];
 
-  expect(parsed).toEqual([
+  expect(parsed).to.deep.equal([
     {
       description: '',
       tags: [
@@ -367,7 +367,7 @@ text
   ]);
 });
 
-test('custom fences', () => {
+it('custom fences', () => {
   const parsed = getParser({ spacing: 'preserve', fence: '###' })(`
   /**
    * @example "" ###ts
@@ -535,7 +535,7 @@ text
     },
   ];
 
-  expect(parsed).toEqual([
+  expect(parsed).to.deep.equal([
     {
       description: '',
       tags: [

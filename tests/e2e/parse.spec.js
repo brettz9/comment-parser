@@ -1,11 +1,11 @@
 const { parse } = require('../../lib');
 
-test('description only', () => {
+it('description only', () => {
   const parsed = parse(`
   /**
    * Description
    */`);
-  expect(parsed).toEqual([
+  expect(parsed).to.deep.equal([
     {
       description: 'Description',
       tags: [],
@@ -67,11 +67,11 @@ test('description only', () => {
   ]);
 });
 
-test('description one-liner', () => {
+it('description one-liner', () => {
   const parsed = parse(`
   /** Description */
   var a`);
-  expect(parsed).toEqual([
+  expect(parsed).to.deep.equal([
     {
       description: 'Description',
       tags: [],
@@ -99,11 +99,11 @@ test('description one-liner', () => {
   ]);
 });
 
-test('block closed on same line', () => {
+it('block closed on same line', () => {
   const parsed = parse(`
   /**
    * Description */`);
-  expect(parsed).toEqual([
+  expect(parsed).to.deep.equal([
     {
       description: 'Description',
       tags: [],
@@ -148,12 +148,12 @@ test('block closed on same line', () => {
   ]);
 });
 
-test('no mid stars', () => {
+it('no mid stars', () => {
   const parsed = parse(`
   /**
      Description
   */`);
-  expect(parsed).toEqual([
+  expect(parsed).to.deep.equal([
     {
       description: 'Description',
       tags: [],
@@ -215,7 +215,7 @@ test('no mid stars', () => {
   ]);
 });
 
-test('skip surrounding empty lines while preserving line numbers', () => {
+it('skip surrounding empty lines while preserving line numbers', () => {
   const parsed = parse(`
   /**
    *
@@ -226,7 +226,7 @@ test('skip surrounding empty lines while preserving line numbers', () => {
    *
    */
   var a`);
-  expect(parsed).toEqual([
+  expect(parsed).to.deep.equal([
     {
       description: 'Description first line Description second line',
       tags: [],
@@ -373,14 +373,14 @@ test('skip surrounding empty lines while preserving line numbers', () => {
   ]);
 });
 
-test('description on the first line', () => {
+it('description on the first line', () => {
   const parsed = parse(`
   /** Description first line
    *
    * Description second line
    */
   var a`);
-  expect(parsed).toEqual([
+  expect(parsed).to.deep.equal([
     {
       description: 'Description first line Description second line',
       tags: [],
@@ -459,16 +459,16 @@ test('description on the first line', () => {
   ]);
 });
 
-test('skip empty blocks', () => {
+it('skip empty blocks', () => {
   const parsed = parse(`
   /**
    *
    */
   var a`);
-  expect(parsed).toHaveLength(0);
+  expect(parsed).to.have.lengthOf(0);
 });
 
-test('multiple blocks', () => {
+it('multiple blocks', () => {
   const parsed = parse(`
   /**
    * Description first line
@@ -480,9 +480,9 @@ test('multiple blocks', () => {
    */
   var b`);
 
-  expect(parsed).toHaveLength(2);
+  expect(parsed).to.have.lengthOf(2);
 
-  expect(parsed).toEqual([
+  expect(parsed).to.deep.equal([
     {
       description: 'Description first line',
       tags: [],
@@ -602,25 +602,25 @@ test('multiple blocks', () => {
   ]);
 });
 
-test('skip `/* */` blocks', () => {
+it('skip `/* */` blocks', () => {
   const parsed = parse(`
   /*
    *
    */
   var a`);
-  expect(parsed).toHaveLength(0);
+  expect(parsed).to.have.lengthOf(0);
 });
 
-test('skip `/*** */` blocks', () => {
+it('skip `/*** */` blocks', () => {
   const parsed = parse(`
   /***
    *
    */
   var a`);
-  expect(parsed).toHaveLength(0);
+  expect(parsed).to.have.lengthOf(0);
 });
 
-test('tag only one-liner', () => {
+it('tag only one-liner', () => {
   const parsed = parse(`/** @my-tag */`);
   const source = [
     {
@@ -641,7 +641,7 @@ test('tag only one-liner', () => {
       },
     },
   ];
-  expect(parsed).toEqual([
+  expect(parsed).to.deep.equal([
     {
       description: '',
       tags: [
@@ -661,7 +661,7 @@ test('tag only one-liner', () => {
   ]);
 });
 
-test('tag only', () => {
+it('tag only', () => {
   const parsed = parse(`
   /**
    *
@@ -738,7 +738,7 @@ test('tag only', () => {
       },
     },
   ];
-  expect(parsed).toEqual([
+  expect(parsed).to.deep.equal([
     {
       description: '',
       tags: [
@@ -758,7 +758,7 @@ test('tag only', () => {
   ]);
 });
 
-test('tag and type only', () => {
+it('tag and type only', () => {
   const parsed = parse(`
   /**
    *
@@ -835,7 +835,7 @@ test('tag and type only', () => {
       },
     },
   ];
-  expect(parsed).toEqual([
+  expect(parsed).to.deep.equal([
     {
       description: '',
       tags: [
@@ -855,7 +855,7 @@ test('tag and type only', () => {
   ]);
 });
 
-test('tag and name only', () => {
+it('tag and name only', () => {
   const parsed = parse(`
   /**
    *
@@ -932,7 +932,7 @@ test('tag and name only', () => {
       },
     },
   ];
-  expect(parsed).toEqual([
+  expect(parsed).to.deep.equal([
     {
       description: '',
       tags: [
@@ -952,7 +952,7 @@ test('tag and name only', () => {
   ]);
 });
 
-test('tag, type, and name', () => {
+it('tag, type, and name', () => {
   const parsed = parse(`
   /**
    *
@@ -1029,7 +1029,7 @@ test('tag, type, and name', () => {
       },
     },
   ];
-  expect(parsed).toEqual([
+  expect(parsed).to.deep.equal([
     {
       description: '',
       tags: [
@@ -1049,7 +1049,7 @@ test('tag, type, and name', () => {
   ]);
 });
 
-test('tag, type, name, and description', () => {
+it('tag, type, name, and description', () => {
   const parsed = parse(`
   /**
    *
@@ -1126,7 +1126,7 @@ test('tag, type, name, and description', () => {
       },
     },
   ];
-  expect(parsed).toEqual([
+  expect(parsed).to.deep.equal([
     {
       description: '',
       tags: [
@@ -1146,7 +1146,7 @@ test('tag, type, name, and description', () => {
   ]);
 });
 
-test('description contains /**', () => {
+it('description contains /**', () => {
   const parsed = parse(`
   /**
    *
@@ -1223,7 +1223,7 @@ test('description contains /**', () => {
       },
     },
   ];
-  expect(parsed).toEqual([
+  expect(parsed).to.deep.equal([
     {
       description: '',
       tags: [
@@ -1243,7 +1243,7 @@ test('description contains /**', () => {
   ]);
 });
 
-test('tag, type, name, and description separated by mixed spaces', () => {
+it('tag, type, name, and description separated by mixed spaces', () => {
   const parsed = parse(`
   /**
    *
@@ -1320,7 +1320,7 @@ test('tag, type, name, and description separated by mixed spaces', () => {
       },
     },
   ];
-  expect(parsed).toEqual([
+  expect(parsed).to.deep.equal([
     {
       description: '',
       tags: [
@@ -1340,7 +1340,7 @@ test('tag, type, name, and description separated by mixed spaces', () => {
   ]);
 });
 
-test('tag with multiline description', () => {
+it('tag with multiline description', () => {
   const parsed = parse(`
   /**
    * @my-tag {my.type} my-name description line 1
@@ -1435,7 +1435,7 @@ test('tag with multiline description', () => {
       },
     },
   ];
-  expect(parsed).toEqual([
+  expect(parsed).to.deep.equal([
     {
       description: '',
       tags: [
@@ -1456,7 +1456,7 @@ test('tag with multiline description', () => {
   ]);
 });
 
-test('optional name', () => {
+it('optional name', () => {
   const parsed = parse(`
   /**
    *
@@ -1533,7 +1533,7 @@ test('optional name', () => {
       },
     },
   ];
-  expect(parsed).toEqual([
+  expect(parsed).to.deep.equal([
     {
       description: '',
       tags: [
@@ -1553,7 +1553,7 @@ test('optional name', () => {
   ]);
 });
 
-test('report name errors', () => {
+it('report name errors', () => {
   const parsed = parse(`
   /**
    *
@@ -1638,7 +1638,7 @@ test('report name errors', () => {
       line: 3,
     },
   ];
-  expect(parsed).toEqual([
+  expect(parsed).to.deep.equal([
     {
       description: '',
       tags: [
@@ -1658,7 +1658,7 @@ test('report name errors', () => {
   ]);
 });
 
-test('misaligned block', () => {
+it('misaligned block', () => {
   const parsed = parse(`
   /**
 * @my-tag {my.type} my-name description line 1
@@ -1753,7 +1753,7 @@ test('misaligned block', () => {
       },
     },
   ];
-  expect(parsed).toEqual([
+  expect(parsed).to.deep.equal([
     {
       description: '',
       tags: [

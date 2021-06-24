@@ -4,7 +4,7 @@ const {
   transforms: { align },
 } = require('../../lib');
 
-test('align - ignore trailing right space', () => {
+it('align - ignore trailing right space', () => {
   const source = `
     /**
      * Description may go
@@ -25,5 +25,5 @@ test('align - ignore trailing right space', () => {
   const aligned = align()(parsed[0]);
   const stringified = stringify(aligned);
 
-  expect(stringified).toEqual(expected);
+  expect(stringified).to.equal(expected);
 });

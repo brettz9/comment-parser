@@ -32,24 +32,24 @@ const sourceMultiple = [
   },
 ];
 
-test('compact - single line', () => {
+it('compact - single line', () => {
   const tokenize = descriptionTokenizer('compact');
   const input = seedSpec({ source: sourceSingle });
   const output = seedSpec({ source: sourceSingle, description: 'one  two' });
-  expect(tokenize(input)).toEqual(output);
+  expect(tokenize(input)).to.equal(output);
 });
 
-test('compact - multiple lines', () => {
+it('compact - multiple lines', () => {
   const tokenize = descriptionTokenizer('compact');
   const input = seedSpec({ source: sourceMultiple });
   const output = seedSpec({
     source: sourceMultiple,
     description: 'one  two three  four',
   });
-  expect(tokenize(input)).toEqual(output);
+  expect(tokenize(input)).to.equal(output);
 });
 
-test('preserve - multiple lines', () => {
+it('preserve - multiple lines', () => {
   const tokenize = descriptionTokenizer('preserve');
   const input = seedSpec({ source: sourceMultiple });
   const output = seedSpec({
@@ -57,10 +57,10 @@ test('preserve - multiple lines', () => {
     description: 'one  two  \n\n  three  four\n',
   });
 
-  expect(tokenize(input)).toEqual(output);
+  expect(tokenize(input)).to.equal(output);
 });
 
-test('preserve - one-liner', () => {
+it('preserve - one-liner', () => {
   const tokenize = descriptionTokenizer('preserve');
   const input = seedSpec({
     source: [
@@ -92,10 +92,10 @@ test('preserve - one-liner', () => {
     ],
   });
 
-  expect(tokenize(input)).toEqual(output);
+  expect(tokenize(input)).to.equal(output);
 });
 
-test('preserve - leading empty lines', () => {
+it('preserve - leading empty lines', () => {
   const source = [
     {
       number: 1,
@@ -132,10 +132,10 @@ test('preserve - leading empty lines', () => {
     description: '\n  line 1  \n  line 2  \n',
   });
 
-  expect(tokenize(input)).toEqual(output);
+  expect(tokenize(input)).to.equal(output);
 });
 
-test('preserve - leading type lines', () => {
+it('preserve - leading type lines', () => {
   const source = [
     {
       number: 1,
@@ -186,10 +186,10 @@ test('preserve - leading type lines', () => {
     description: 'line 1  \n  line 2  \n',
   });
 
-  expect(tokenize(input)).toEqual(output);
+  expect(tokenize(input)).to.equal(output);
 });
 
-test('custom joiner - single line', () => {
+it('custom joiner - single line', () => {
   const tokenize = descriptionTokenizer((lines) => {
     return lines
       .reduce((str, { tokens: { description } }) => {
@@ -203,10 +203,10 @@ test('custom joiner - single line', () => {
   });
   const input = seedSpec({ source: sourceSingle });
   const output = seedSpec({ source: sourceSingle, description: 'one  two' });
-  expect(tokenize(input)).toEqual(output);
+  expect(tokenize(input)).to.equal(output);
 });
 
-test('custom joiner - multiple lines', () => {
+it('custom joiner - multiple lines', () => {
   const tokenize = descriptionTokenizer((lines) => {
     return lines
       .reduce((str, { tokens: { description } }) => {
@@ -223,5 +223,5 @@ test('custom joiner - multiple lines', () => {
     source: sourceMultiple,
     description: 'one  two three  four',
   });
-  expect(tokenize(input)).toEqual(output);
+  expect(tokenize(input)).to.equal(output);
 });

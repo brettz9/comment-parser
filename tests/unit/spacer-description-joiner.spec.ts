@@ -69,26 +69,26 @@ const source: Line[] = [
   },
 ];
 
-test('compact', () => {
+it('compact', () => {
   const joined = getJoiner('compact')(source);
-  expect(joined).toBe(
+  expect(joined).to.equal(
     'Description first line\twith\ttabs second line third line'
   );
 });
 
-test('preserve', () => {
+it('preserve', () => {
   const joined = getJoiner('preserve')(source);
-  expect(joined).toBe(
+  expect(joined).to.equal(
     '  \n  Description first line\twith\ttabs   \n    second line   \n  \n      third line   '
   );
 });
 
-test('preserve - empty', () => {
+it('preserve - empty', () => {
   const joined = getJoiner('preserve')([]);
-  expect(joined).toBe('');
+  expect(joined).to.equal('');
 });
 
-test('preserve - no delimiter', () => {
+it('preserve - no delimiter', () => {
   const joined = getJoiner('preserve')([
     {
       number: 1,
@@ -101,10 +101,10 @@ test('preserve - no delimiter', () => {
       }),
     },
   ]);
-  expect(joined).toBe('   line with no delimiter');
+  expect(joined).to.equal('   line with no delimiter');
 });
 
-test('custom', () => {
+it('custom', () => {
   const spacerFn = (source: Line[]) =>
     source
       .map(({ tokens: { description } }) =>
@@ -114,7 +114,7 @@ test('custom', () => {
       .join(' ');
 
   const joined = getJoiner(spacerFn)(source);
-  expect(joined).toBe(
+  expect(joined).to.equal(
     'DESCRIPTION FIRST LINE WITH TABS SECOND LINE THIRD LINE'
   );
 });

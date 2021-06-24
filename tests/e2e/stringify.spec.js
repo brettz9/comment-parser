@@ -1,6 +1,6 @@
 const { parse, stringify } = require('../../lib/');
 
-test('preserve formatting', () => {
+it('preserve formatting', () => {
   const source = `
   /**
 * @my-tag {my.type} my-name description line 1
@@ -9,5 +9,5 @@ test('preserve formatting', () => {
    */`;
   const parsed = parse(source);
   const out = stringify(parsed[0]);
-  expect(out).toBe(source.slice(1));
+  expect(out).to.equal(source.slice(1));
 });

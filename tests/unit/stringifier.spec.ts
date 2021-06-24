@@ -146,16 +146,16 @@ const block = {
   problems: [],
 };
 
-test('default', () => {
+it('default', () => {
   const s = getStringifier()(block);
   const expected = `
   /**
    * Description may go
    * over multiple lines followed by @tags
-   * 
+   *
 * @my-tag {my.type} my-name description line 1
       description line 2
     * description line 3
    */`;
-  expect(s).toBe(expected.slice(1));
+  expect(s).to.equal(expected.slice(1));
 });

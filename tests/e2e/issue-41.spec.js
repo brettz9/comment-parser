@@ -1,12 +1,12 @@
 const { default: getParser } = require('../../lib/parser');
 
-test('quoted name', () => {
+it('quoted name', () => {
   const parsed = getParser()(`
   /**
    * @section "Brand Colors" - Here you can find all the brand colors...
    */`);
 
-  expect(parsed).toEqual([
+  expect(parsed).to.deep.equal([
     {
       description: '',
       tags: [
@@ -115,13 +115,13 @@ test('quoted name', () => {
   ]);
 });
 
-test('optional name', () => {
+it('optional name', () => {
   const parsed = getParser()(`
   /**
    * @section [Brand Colors] - Here you can find all the brand colors...
    */`);
 
-  expect(parsed).toEqual([
+  expect(parsed).to.deep.equal([
     {
       description: '',
       tags: [
@@ -230,13 +230,13 @@ test('optional name', () => {
   ]);
 });
 
-test('inconsistent quotes', () => {
+it('inconsistent quotes', () => {
   const parsed = getParser()(`
   /**
    * @section "Brand Colors - Here you can find all the brand colors...
    */`);
 
-  expect(parsed).toEqual([
+  expect(parsed).to.deep.equal([
     {
       description: '',
       tags: [

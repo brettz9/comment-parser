@@ -4,7 +4,7 @@ const {
   transforms: { flow, indent, align },
 } = require('../../lib/');
 
-test('align + indent', () => {
+it('align + indent', () => {
   const source = `
   /**
    * Description may go
@@ -28,5 +28,5 @@ test('align + indent', () => {
   const parsed = parse(source);
   const transform = flow(indent(4), align());
   const out = stringify(transform(parsed[0]));
-  expect(out).toBe(expected.slice(1));
+  expect(out).to.equal(expected.slice(1));
 });

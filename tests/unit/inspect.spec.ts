@@ -2,7 +2,7 @@ import getParser from '../../src/parser/index';
 import inspect from '../../src/stringifier/inspect';
 import { seedBlock } from '../../src/util';
 
-test('multiple lines', () => {
+it('multiple lines', () => {
   const source = `
   /**
    * Description may go
@@ -22,10 +22,10 @@ test('multiple lines', () => {
 |   4|{3}  |*        |{1}          |@param|{1}    |value|{1}     |{any}   |{1}     |value of any type               |   |
 |   5|{3}  |         |             |      |       |     |        |        |        |                                |*/ |`;
 
-  expect(inspect(parsed[0])).toEqual(expected.slice(1));
+  expect(inspect(parsed[0])).to.equal(expected.slice(1));
 });
 
-test('single line', () => {
+it('single line', () => {
   const source = '/** @param {string} name name parameter */';
   const parsed = getParser({ startLine: 12345 })(source);
   const expected = `
@@ -33,11 +33,11 @@ test('single line', () => {
 |-----|-----|---------|-------------|------|-------|----|--------|--------|--------|---------------|---|
 |12345|     |/**      |{1}          |@param|{1}    |name|{1}     |{string}|{1}     |name parameter |*/ |`;
 
-  expect(inspect(parsed[0])).toEqual(expected.slice(1));
+  expect(inspect(parsed[0])).to.equal(expected.slice(1));
 });
 
-test('empty', () => {
+it('empty', () => {
   const expected = '';
 
-  expect(inspect(seedBlock())).toEqual(expected.slice(1));
+  expect(inspect(seedBlock())).to.equal(expected.slice(1));
 });

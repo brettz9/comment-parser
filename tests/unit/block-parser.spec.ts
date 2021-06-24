@@ -130,15 +130,15 @@ beforeEach(() => {
   ];
 });
 
-test('standard fences', () => {
+it('standard fences', () => {
   const parser = getParser();
   const groups: Line[][] = parser(source);
 
-  expect(groups.length).toBe(2);
-  expect(groups).toEqual([source.slice(0, 5), source.slice(5)]);
+  expect(groups.length).to.equal(2);
+  expect(groups).to.deep.equal([source.slice(0, 5), source.slice(5)]);
 });
 
-test('custom fence', () => {
+it('custom fence', () => {
   source = source.map((line) => {
     line.tokens.description = line.tokens.description.replace('```', '###');
     return line;
@@ -147,11 +147,11 @@ test('custom fence', () => {
   const parser = getParser({ fence: '###' });
   const groups: Line[][] = parser(source);
 
-  expect(groups.length).toBe(2);
-  expect(groups).toEqual([source.slice(0, 5), source.slice(5)]);
+  expect(groups.length).to.equal(2);
+  expect(groups).to.deep.equal([source.slice(0, 5), source.slice(5)]);
 });
 
-test('fence function', () => {
+it('fence function', () => {
   source = source.map((line) => {
     line.tokens.description = line.tokens.description.replace('```', '###');
     return line;
@@ -164,6 +164,6 @@ test('fence function', () => {
   const parser = getParser({ fence: isFenced });
   const groups: Line[][] = parser(source);
 
-  expect(groups.length).toBe(2);
-  expect(groups).toEqual([source.slice(0, 5), source.slice(5)]);
+  expect(groups.length).to.equal(2);
+  expect(groups).to.deep.equal([source.slice(0, 5), source.slice(5)]);
 });

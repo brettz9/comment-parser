@@ -3,7 +3,7 @@ import { seedTokens, seedSpec } from '../../src/util';
 
 const tokenize = typeTokenizer();
 
-test('ok', () => {
+it('ok', () => {
   expect(
     tokenize(
       seedSpec({
@@ -18,7 +18,7 @@ test('ok', () => {
         ],
       })
     )
-  ).toEqual(
+  ).to.equal(
     seedSpec({
       type: 'string',
       source: [
@@ -36,7 +36,7 @@ test('ok', () => {
   );
 });
 
-test('inconsistent curlies', () => {
+it('inconsistent curlies', () => {
   expect(
     tokenize(
       seedSpec({
@@ -51,7 +51,7 @@ test('inconsistent curlies', () => {
         ],
       })
     )
-  ).toEqual(
+  ).to.equal(
     seedSpec({
       problems: [
         {
@@ -74,7 +74,7 @@ test('inconsistent curlies', () => {
   );
 });
 
-test('object notation', () => {
+it('object notation', () => {
   expect(
     tokenize(
       seedSpec({
@@ -89,7 +89,7 @@ test('object notation', () => {
         ],
       })
     )
-  ).toEqual(
+  ).to.equal(
     seedSpec({
       type: '{a: 1}',
       source: [
@@ -107,7 +107,7 @@ test('object notation', () => {
   );
 });
 
-test('omit', () => {
+it('omit', () => {
   expect(
     tokenize(
       seedSpec({
@@ -122,7 +122,7 @@ test('omit', () => {
         ],
       })
     )
-  ).toEqual(
+  ).to.equal(
     seedSpec({
       source: [
         {
@@ -137,7 +137,7 @@ test('omit', () => {
   );
 });
 
-test('multiline', () => {
+it('multiline', () => {
   const spec = seedSpec({
     source: [
       {
@@ -205,7 +205,7 @@ test('multiline', () => {
     ],
   });
 
-  expect(tokenized).toEqual(expected);
+  expect(tokenized).to.equal(expected);
 });
 
 test.each([
@@ -261,5 +261,5 @@ test.each([
   });
 
   const tokenized = tokenize(spec);
-  expect(tokenized.type).toEqual(type);
+  expect(tokenized.type).to.equal(type);
 });

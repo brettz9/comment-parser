@@ -1,4 +1,4 @@
-const { parse, inspect } = require('../../lib');
+const { parse } = require('../../lib');
 
 const source = `
   /** Multi-line typedef for an options object type.
@@ -8,12 +8,12 @@ const source = `
    * }} MyOptions description text
    */`;
 
-test('name after multiline tag', () => {
+it('name after multiline tag', () => {
   const parsed = parse(source);
   // console.log(inspect(parsed[0]));
 
-  expect(parsed[0].problems).toEqual([]);
-  expect(parsed[0].tags[0]).toMatchObject({
+  expect(parsed[0].problems).to.deep.equal([]);
+  expect(parsed[0].tags[0]).to.shallowDeepEqual({
     tag: 'typedef',
     name: 'MyOptions',
     type: '{prop: number}',
