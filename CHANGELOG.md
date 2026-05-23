@@ -1,5 +1,11 @@
 # v1.4.1
 
+## 1.4.7
+
+### Patch Changes
+
+- c413827: Ensure non-optional name is only broken on equal sign if prefixed by an identifier
+
 ## 1.4.6
 
 ### Patch Changes
