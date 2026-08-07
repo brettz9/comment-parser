@@ -1,5 +1,19 @@
 # v1.4.1
 
+## 1.4.8
+
+### Patch Changes
+
+- 1f4f081: fix: update types
+
+  refactor: use non-deprecated methods
+
+  chore: update devDependencies and add rootDir to avoid warning
+
+  chore: add recommended baseline-browser-mapping
+
+  chore: disallow scripts as per latest npm guidance
+
 ## 1.4.7
 
 ### Patch Changes
